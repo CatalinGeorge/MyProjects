@@ -1,0 +1,34 @@
+{% extends 'bas.html' %}
+
+{% block content %}
+{% include 'business/includes/top_menu.html' %}
+<div class="container">
+        <div class="col-md-8 col-md-offset-2 box-shadow ptb50  mt-100 relative bg-white round-small mb40">
+                <h4 class="up mt0 mb50 center fw600">Edit your profile</h4>
+                <h5 class="up mt0 mb20 center fw600 ">  <a href="/user-profile/change-password/">Change password</a> </h5>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+        <p>
+              <div class="row">
+                      <div class="col-md-4 p10 mtb10">  {{ field.label_tag }}</div>
+          
+                      <div class="col-md-8 form-elem">    {{ field }}</div>
+      </div>
+          {% for error in field.errors %}
+            <p style="color: red">{{ error }}</p>
+          {% endfor %}
+        </p>
+      {% endfor %}
+        <div><img src="{{ form.instance.image.url }}"  width="240" /> </div>
+        <div class="row ptb30">
+                <div class="col-md-12 center">
+        <button class="gray-btn ptb10 plr30  font-12  inline up text-white" type="submit">Submit</button>
+             </div>
+            </div>
+    </form>
+
+</div>
+</div>
+
+{% endblock %}

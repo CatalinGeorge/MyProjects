@@ -1,0 +1,23 @@
+{% extends "bas.html" %}
+
+{% block content %}
+
+<h2>This is the home page</h2>
+
+{% for article in posts %}
+    <div class="col-md-3">
+        <div class="well">{{ article.date|date }} - {{ article.title }} for only $ {{ article.price }}</div>
+    </div>
+{% empty %}
+    <div>No articles yet.</div>
+{% endfor %}
+
+<div class="clearfix"></div>
+
+<h1>New post</h1>
+    <form method="POST" class="myawesomeform">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+
+{% endblock %}

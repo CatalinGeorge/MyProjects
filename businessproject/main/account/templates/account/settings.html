@@ -1,0 +1,18 @@
+
+{% extends "bas.html" %}
+{% load i18n %}
+
+{% block body_class %}account account-settings{% endblock %}
+
+{% block head_title %}{% trans "Account" %}{% endblock %}
+
+<h1>Ce plm</h1>
+    <div class="row">
+        <div class="col-md-5">
+            <form method="POST" action="{% url "account_settings" %}">
+                <legend>{% trans "Account" %}</legend>
+                {% csrf_token %}
+                <button class="btn btn-primary" type="submit">{% trans "Save" %}</button>
+            </form>
+        </div>
+    </div>

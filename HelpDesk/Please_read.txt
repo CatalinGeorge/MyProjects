@@ -1,0 +1,5 @@
+Hi, I just found a vulnerability on your website.
+I don't mean to destroy, I just want to notify you that your system is not safe.
+
+-Thank you
+-WhiteHat

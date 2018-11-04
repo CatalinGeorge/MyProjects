@@ -1,0 +1,33 @@
+<div class="bg-white ptb50">
+    <div class="container">
+ 
+      <div class="row">
+
+          {% for post in posts %}
+        <div class="col-md-6 mtb15">
+        <a href ={% url 'business:single' slug=post.slug pk=post.pk  %} class="single-link"><div class="row bg-white box-shadow round-small">
+            <div class="col-md-3 p0">
+              {% load staticfiles %}
+              <div class="relative" style="background:url({{ post.image1.url }}); background-size:cover; background-position:center; width:100%; height:110px; border-top-left-radius: 5px; border-bottom-left-radius: 5px;"></div>
+            </div>
+            <div class="col-md-9">
+                <h5 class="fw600 mb0 cap">{{ post.title }}</h5>
+                <p class="font-12 text-gray mt10">{{ post.description|safe }} </p>
+                <div class="v-center ">
+                  <img class="pr5" src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                  <img class="" src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                  <img class="plr5" src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                  <img class="" src="https://png.icons8.com/windows/12/27ae60/star.png">
+                  <img class="plr5" src="https://png.icons8.com/windows/12/27ae60/star.png">
+                  <span class="text-gray v-right font-12">
+                    <img src="https://png.icons8.com/material/15/27ae60/marker.png">
+                    <span class="text-align-mid cap">{{ post.location }}</span>
+                  </span>
+                </div>
+            </div>
+          </div></a>
+        </div>
+        {% endfor %}
+      </div><!--end row-->
+    </div>
+  </div>

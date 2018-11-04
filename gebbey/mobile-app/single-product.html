@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <title>Classifieds mobile</title>
+
+        <!--Google Fonts-->
+    <!--link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet"-->
+
+    <!--CSS Styles-->
+    <link rel = "stylesheet" type = "text/css" href = "css/grid.css">
+    <link rel = "stylesheet" type = "text/css" href = "css/style.css">
+
+    <!--jQuery-->
+    <script src="js/jquery.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/ngcordova.js"></script>
+
+    <!--Google Maps-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHO4QRr0dE4w5r9OhwG-VEWjao1i8tlQg"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.transitions.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
+
+    <!--LinearIcons-->
+    <link href="lib/linearicons/style.css" rel="stylesheet">
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+
+
+
+      </head>
+      <body ng-app="clas" ng-controller="single">
+
+          <div class="loading" ng-show="noInternet"><h3>The internet connection is slow or there is no internet connection</h3><img src="img/loading.gif"></div>
+          <div class="loading" ng-hide="loading"><img src="img/loading.gif"></div>
+
+              <!--Header-->
+          <div class="header bg-grad">
+
+            <a href="/mobile/close"><i class="lnr lnr-chevron-left"></i> <span style="margin-top: 0px; display: inline-block; position: absolute;">{{categ_name}}</span></a>
+
+            <div class="top-right">
+              <a href="profile.html" ng-if="user !== 'null'"><i class="lnr lnr-user"></i></a>
+              <a href="login.html" ng-if="user == 'null'" class="mlr10"><i class="lnr lnr-enter"></i></a>
+              <a class="" href="search.html"><i class="lnr lnr-magnifier"></i></a>
+          </div>
+
+        </div><!--Header-->
+
+          <div class="pt45"></div>
+
+          <div ng-show="media == 'false'">
+              <img src="img/noimage.png" width="100%">
+            </div>
+
+          <!--Single Page-->
+          <data-owl-carousel ng-show="media != 'false'" class="owl-carousel" data-options="{navigation: false, pagination: true, rewindNav : false, autoHeight: true}">
+                <div owl-carousel-item="" ng-repeat="med in media">
+                    <img src="https://clas.pssthemes.com/media/{{item.i_media}}/{{med.me_img}}" width="100%">
+                  </div>
+          </data-owl-carousel>
+
+            <div class="row border-b ptb30">
+              <div class="col-xs-8 border-r">
+                <h3><a href="index.html">{{item.i_name}}</a></h3>
+                <p class="small text-gray">{{item.city_name}}</p>
+                <p class="small text-gray">Views: {{item.i_views}}</p>
+              </div>
+              <div class="col-xs-4 center">
+                <h1 class="fw600 text-blue font-18 pt15">{{item.i_price | number}}</h1>
+              </div>
+            </div>
+
+
+
+
+            <!--Sharing here-->
+
+            <div class="plr15 ptb20">
+             
+              <div class="row p0">
+                <div class="col-xs-6 border-r">
+                  <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5ac36475003b52001341b2d2&product=inline-share-buttons"></script>
+                <div class="sharethis-inline-share-buttons"></div>
+                </div>
+                <div class="col-xs-3">
+                  <a ng-show="item.i_email != 0" href="mailto:{{item.i_email}}"><img src="https://png.icons8.com/ios/30/23b4d5/email.png" class=""></a>
+              </div>
+                <div class="col-xs-3">
+                  <a href="tel:{{item.i_phone}}"><img src="https://png.icons8.com/ios/30/23b4d5/phone.png" class=""></a>
+              </div>
+              
+              </div>
+
+              <div class="border-b pb20"></div>
+
+              <div class="row">
+                <div class="col-xs-12 p0">
+
+                    <h4 class="pt20">Detail (ዝርዝር）</h4>
+
+                    <ul>
+                    <span ng-show="categ == 1"  class="specials"> <!--Real Estate Specials-->
+                        <li ng-show="specials.spre_type != '0'"><div class="row"><div class="col-xs-6">Type (ዓይነት):</div><div class="col-xs-6"> {{specials.spre_type}}</div></div></li>
+                        <li ng-show="specials.spre_rentsale != '0'"><div class="row"><div class="col-xs-6">For (ሽያጭ/ኪራይ):</div><div class="col-xs-6"> {{specials.spre_rentsale}}</div></div></li>
+                    </span>
+      
+                    <span ng-show="categ == 2"  class="specials"> <!--Jobs Specials-->
+                      <li ng-show="specials.spjo_company != '0'"><div class="row"><div class="col-xs-6">Company (ድርጅት):</div><div class="col-xs-6"> {{specials.spjo_company}}</div></div></li>
+                      <li><div class="row"><div class="col-xs-6">Salary （ደመዎዝ）:</div><div class="col-xs-6"> {{item.i_price}}</div></div></li>
+                        <li ng-show="specials.spjo_job_title != '0'"><div class="row"><div class="col-xs-6">Job Title （የስራ መደቡ መጠርያ）:</div><div class="col-xs-6"> {{specials.spjo_job_title}}</div></div></li>
+                        <li ng-show="specials.spjo_qualification != '0'"><div class="row"><div class="col-xs-6">Qualification （የሙያ ብቃት）:</div><div class="col-xs-6"> {{specials.spjo_qualification}}</div></div></li>
+                        <li ng-show="specials.spjo_deadline != '0'"><div class="row"><div class="col-xs-6">Deadline (የመጨረሻ ቀን）:</div><div class="col-xs-6"> {{specials.spjo_deadline}}</div></div></li>
+                    </span>
+      
+                    <span ng-show="categ == 5"  class="specials"> <!--Automobile Specials-->
+                        <li ng-show="specials.make_name != '0'"><div class="row"><div class="col-xs-6">Make(አይነት):</div><div class="col-xs-6"> {{specials.make_name}}</div></div></li>
+                        <li ng-show="specials.model_name != '0'"><div class="row"><div class="col-xs-6">Model(ሞዴል):</div><div class="col-xs-6"> {{specials.model_name}}</div></div></li>
+                        <li ng-show="specials.spau_body != '0'"><div class="row"><div class="col-xs-6">Body type:</div><div class="col-xs-6"> {{specials.spau_body}}</div></div></li>
+                        <li ng-show="specials.spau_color != '0'"><div class="row"><div class="col-xs-6">Color:</div><div class="col-xs-6"> {{specials.spau_color}}</div></div></li>
+                        <li ng-show="specials.spau_mileage != '0'"><div class="row"><div class="col-xs-6">Mileage(ኪሎ ሜትር):</div><div class="col-xs-6"> {{specials.spau_mileage}} km</div></div></li>
+                        <li ng-show="specials.spau_year_made != '0'"><div class="row"><div class="col-xs-6">Year made(የተሰራበት አመት):</div><div class="col-xs-6"> {{specials.spau_year_made}}</div></div></li>
+                    </span>
+      
+                    <span ng-show="categ == 6"  class="specials"> <!--EventsSpecials-->
+                        <li ng-show="specials.spev_company != '0'"><div class="row"><div class="col-xs-6">Company (ድርጅት):</div><div class="col-xs-6"> {{specials.spev_company}}</div></div></li>
+                        <li ng-show="specials.spev_startdate != '0'"><div class="row"><div class="col-xs-6">Starting Date (የሚጀምርበት ቀን):</div><div class="col-xs-6"> {{specials.spev_startdate}}</div></div></li>
+                        <li ng-show="specials.spev_starttime != '0'"><div class="row"><div class="col-xs-6">Ending Date (የሚያልቅበት ቀን):</div><div class="col-xs-6"> {{specials.spev_starttime}}</div></div></li>
+                    </span>
+                    </ul>
+                    
+
+                  <p class="wrapp pb30">{{item.i_description}}</p>
+                </div>
+              </div>
+              
+              <div ng-show="item.i_address != 0">
+                <h4 class="pt20">Address</h4>
+                <p class="ptb10 wrapp">{{item.i_address}}</p>
+              </div>
+              
+            </div>
+
+            <h4 ng-click="showLocationTrigger()" class="ptb10 plr20 m0 border-light">Location (ቦታ） 
+                <i ng-show="!showLocation" class="lnr lnr-chevron-down float-right font-24"></i>
+                <i ng-show="showLocation" class="lnr lnr-chevron-up float-right font-24"></i>
+            </h4>
+
+            <div class="plr15" ng-show="showLocation">
+                <iframe
+                  style="width: 100%;"
+                  height="250"
+                  frameborder="0" style="border:0"
+                  ng-src="{{mapURL}}" allowfullscreen>
+                </iframe>
+              </div>
+
+
+            <!-- Chat -->
+          <div class="mt30">
+
+              <h4 ng-click="showCommentsTrigger()" class="ptb10 plr20 m0 border-light">Comments /አስተያየት ({{comments.length}}) 
+                  <i ng-show="!showComments" class="lnr lnr-chevron-down float-right font-24"></i>
+                  <i ng-show="showComments" class="lnr lnr-chevron-up float-right font-24"></i>
+              </h4>
+
+            <!-- Reply -->
+          <div class="rowp0 bg-white clearfix ptb10 full-width" ng-show="showComments">
+
+              <div class="col-xs-10">
+                  <input ng-show="comments.length>0" type="text"  placeholder="Join conversation..." ng-model="message" class="pl20 text-left fw500 bg-gray text-dark round ptb10">
+                  <input ng-show="comments.length == 0" type="text"  placeholder="Start conversation..." ng-model="message" class="pl20 text-left fw500 bg-gray text-dark round ptb10">
+              </div>
+  
+              <div class="col-xs-2 m0 pl0 pt5" ng-click="sendMessage(message)" ng-hide="sendMessageAlready">
+                <img src="https://png.icons8.com/metro/30/23b4d5/sent.png">
+              </div>
+              <div class="col-xs-2 m0 pl0 pt5" ng-show="sendMessageAlready">
+                <img src="https://png.icons8.com/metro/30/23b4d5/sent.png">
+              </div>
+            </div>
+
+
+            <div ng-show="comments && showComments" id="bottom" ng-init="comLimit=3" class="p20">
+              <div ng-repeat="com in comments | limitTo:comLimit">
+                  <div class="p10">
+                    <div class="user_comment" ng-if="com.co_user == user_id">
+                        <div class="comment-user">{{com.u_username}}: </div>
+                      <p class="text-dark bg-gray p10 round-lrr mr10 yes_user_comment">{{com.co_comment}}</p>
+                    </div>
+                    <div class="user_comment" ng-if="com.co_user != user_id">
+                        <div class="comment-user">{{com.u_username}}: </div>
+                      <p class="text-white bg-blue p10 round-lrl ml10 no_user_comment">{{com.co_comment}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="center">
+                  <a ng-click="comLimit = comLimit+3" ng-show="comLimit<comments.length && showComments" class="inline ptb10 plr20 mtb20 border-light">More comments</a>
+              </div>
+              
+
+              <div ng-show="!comments && showComments" class="ptb10 plr20 mtb20 border-light">
+                No comments here.
+                </div>
+
+          </div><!-- Chat -->
+
+
+          <div class="border-b"></div>
+
+
+           <!-- related -->
+           <div class="p20">
+              <h4 ng-show="related.length != 1">You may also like</h4>
+
+
+              <data-owl-carousel class="owl-carousel related pt45" data-options="{nav: true, dots: true, rewindNav : false, autoHeight: true}">
+                <div ng-if="item.i_id != relat.i_id" owl-carousel-item="" ng-repeat="relat in related">
+                  <a href="single-product.html?item={{relat.i_slug}}&cat={{categ}}">
+
+
+<div class="col-xs-12 p0">
+    <div ng-show="relat.me_img" style="background:url(https://clas.pssthemes.com/media/{{relat.i_media}}/{{relat.me_img}}) no-repeat center center; height:160px;" class="relative img-cover">
+    </div>
+    <div ng-show="!relat.me_img" style="background:url(img/noimage.png) no-repeat center center; height:160px;" class="relative img-cover">
+    </div>
+</div>
+
+
+<div class="col-xs-12 p0">
+  <h4 class="p20 fw700">{{relat.i_name}} <span class="float-right ptb3 plr10 round bg-blue text-white font-10 up">Details</span></h4>
+  <p class="small mt-20 pl20 pb10">in {{relat.city_name}}</p>
+</div>
+
+                  </a>
+                </div>
+              </data-owl-carousel>
+
+
+              </div>
+
+              <div ng-show="showReport">
+                <div class="add_form card col-md-6" ng-init="reportReason = '0'">
+                  <select ng-model="reportReason">
+                    <option value="0">Select report reason</option>
+                    <option value="condo">User specified wrong or fake information</option>
+                    <option value="land">User specified illegal or illicit product</option>
+                    <option value="villa">User specified offensive content</option>
+                  </select>
+                </div>
+  
+                <div class="col-md-6 col-md-offset-3" style="z-index:1;">
+                  <div class="add_form card submit-btn bg-blue" ng-show="reportReason != '0'">
+                      <input type="submit" name="submit" value="Report" ng-click="report(reportReason)">
+                  </div>
+                </div>
+  </div>
+
+              <a class="block center ptb20" ng-click="scrollToBottom()">Report this listing</a>
+
+              <div class="ptb30"></div>
+
+
+            <!--JS Scripts-->
+            <script type = 'text/javascript' src = "js/scripts.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <title>Classifieds mobile</title>
+
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+    <!--LinearIcons-->
+    <link href="lib/linearicons/style.css" rel="stylesheet">
+
+    <!--CSS Styles-->
+    <link rel = "stylesheet" type = "text/css" href = "css/grid.css">
+    <link rel = "stylesheet" type = "text/css" href = "css/style.css">
+
+    <!--jQuery-->
+    <script src="js/jquery.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/ngcordova.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+
+        <!--JS Scripts-->
+        <script type = 'text/javascript' src = "js/scripts.js"></script>
+
+      </head>
+      <body ng-app="clas" ng-controller="items">
+
+          <div class="loading" ng-show="noInternet"><h3>The internet connection is slow or there is no internet connection</h3><img src="img/loading.gif"></div>
+          <div class="loading" ng-hide="loading"><img src="img/loading.gif"></div>
+
+        <!--Header-->
+          <div class="header bg-grad">
+
+              <a onclick="window.history.back()"><i class="lnr lnr-chevron-left"></i> <span style="margin-top: 0px; display: inline-block; position: absolute;">{{categ_name}}</span></a>
+
+              <div class="top-right">
+                <a href="profile.html" ng-if="user !== 'null'"><i class="lnr lnr-user"></i></a>
+                <a href="login.html" ng-if="user == 'null'" class="mlr10"><i class="lnr lnr-enter"></i></a>
+                <a class="" href="search.html"><i class="lnr lnr-magnifier"></i></a>
+            </div>
+
+          </div><!--Header-->
+
+          <!--Page-->
+          <div class="page home-page container">
+
+            <div class="row pt10">
+
+
+              <!--Add form-->
+              <form name="myForm">
+
+              <div class="add-form-item m10">
+
+                <div class="add_form card">
+                  <div class="add_intro row m0">
+                    <input type="text" name="myName" ng-model="product.name" placeholder="Start here (እዚህ ይጀምሩ)" ng-click="hideAndShow()">
+                  </div>
+                  
+                  <div class="add_content bg-light-more plr20 pb30" ng-hide="justSubmitted || closeAddContent">
+
+                    <a ng-click="closeAddContent = true" class="block center" style="margin-left:-40px;"><i class="lnr lnr-cross"></i><span style="position:absolute;margin-top:0px;padding-left:5px;">Cancel</span></a>
+
+                    <div class="add_form card row m0">
+                      <textarea name="description" rows="5" placeholder="Description (ዝርዝ)" ng-model="product.description"></textarea>
+                    </div>
+
+
+                    <div ng-if="categ != 2" class="add_form card row m0">
+                        <input type="number" ng-model="product.price" placeholder="Price (ዋጋ)">
+                    </div>
+
+
+        <h4 class="pt20">Location</h4>
+                    <div class="row m0" ng-init="product.country='sel';product.state='sel';product.city='sel'">
+                      <div class="add_form card col-md-4">
+                        <select ng-model="product.country" name="country" ng-change="getStates(product.country)">
+                          <option value="sel">Country(አገር)</option>
+
+                          <option ng-repeat="country in countries" value="{{country.country_id}}">{{country.country_name}}</option>
+
+                      </select>
+                      </div>
+                      <div class="add_form card col-md-4">
+                        <select ng-model="product.state" name="state" ng-change="getCities(product.state)">
+                          <option value='sel'>State(ክልል)</option>
+                          <option ng-repeat="state in states" value="{{state.state_id}}">{{state.state_name}}</option>
+                      </select>
+                      </div>
+                      <div class="add_form card col-md-4">
+                        <select ng-model="product.city" name="city">
+                          <option value='sel'>City(ከተማ)</option>
+                          <option ng-repeat="city in cities" value="{{city.city_id}}">{{city.city_name}}</option>
+                      </select>
+                      </div>
+                    </div>
+
+                    <div class="add_form card">
+                      <textarea ng-model="product.address" rows="2" placeholder="Address (አድራሻ)"></textarea>
+                    </div>
+
+        <h4 class="pt20">Contact</h4>
+                    <div class="row m0">
+                      <div class="add_form card col-md-6">
+                          <input type="text" ng-model="product.phone" placeholder="Phone(ስልክ)">
+                      </div>
+                      <div class="add_form card col-md-6">
+                          <input type="text" ng-model="product.email" placeholder="Email(ኢሜይል)">
+                      </div>
+                    </div>
+
+
+                        <span ng-if="categ == 1">
+                        <h4 class="pt20">Other details</h4>
+                        <div class="row m0" ng-init="product.type='0'">
+                            <div class="add_form card col-md-6">
+                              <select ng-model="product.type">
+                                <option value="0">Type (ዓይነት)</option>
+                                <option value="condo">Condo</option>
+                                <option value="land">Land</option>
+                                <option value="villa">Villa</option>
+                              </select>
+                            </div>
+                            <!--div class="add_form card col-md-3">
+                                <input type="number" ng-model="product.bedrooms" placeholder="Bedrooms">
+                            </div>
+                            <div class="add_form card col-md-3">
+                                <input type="number" ng-model="product.bathrooms" placeholder="Bathrooms">
+                            </div-->
+                            <div class="add_form card col-md-6" ng-init="product.rentsale='0'">
+                              <select ng-model="product.rentsale">
+                                <option value="0">For (ሽያጭ/ኪራይ)</option>
+                                <option value="rent">Rent</option>
+                                <option value="sale">Sale</option>
+                              </select>
+                            </div>
+                          </div>
+                        </span>
+
+                        <span ng-if="categ == 2">
+                        <h4 class="pt20">Other details</h4>
+                        <div class="row m0">
+                            <div class="add_form card col-md-8">
+                                <input type="text" ng-model="product.company" placeholder="Company (ድርጅት)">
+                            </div>
+                            <div class="add_form card col-md-4">
+                                <input type="number" ng-model="product.price" placeholder="Salary（ደመዎዝ)">
+                            </div>
+                          </div>
+                          <div class="row m0">
+                            <div class="add_form card col-md-6">
+                                <input type="text" ng-model="product.job_title" placeholder="Job Title（የስራ መደቡ መጠርያ)">
+                            </div>
+                            <div class="add_form card col-md-6">
+                                <input type="text" ng-model="product.qualification" placeholder="Qualification（የሙያ ብቃት）">
+                            </div>
+                          </div>
+                          <div class="row m0">
+                              <label class="block pl20 pt20">Deadline (የመጨረሻ ቀን）</label>
+                              <div class="add_form card col-md-12">                                  
+                                  <input type="date" ng-model="product.deadline">
+                              </div>
+                            </div>
+                        </span>
+
+                        <span ng-if="categ == 5">
+                        <h4 class="pt20">Other details</h4>
+                        <div class="row m0" ng-init="product.make='0';product.model='0'">
+                          <div class="add_form card col-md-6">
+                            <!--select ng-options="make as make.make_name for make in makes" ng-model="product.make" ng-change="getModels(product.make)"></select-->
+                            <select ng-model="product.make" ng-change="getModels(product.make)">
+                              <option value="0">Make(አይነት)</option>
+
+                              <option ng-repeat="make in makes" value="{{make.make_id}}">{{make.make_name}}</option>
+
+                          </select>
+                          </div>
+                          <div class="add_form card col-md-6">
+                            <select ng-model="product.model">
+                              <option value="0">Model(ሞዴል)</option>
+
+                              <option ng-repeat="model in models" value="{{model.model_id}}">{{model.model_name}}</option>
+
+                          </select>
+                          </div>
+                        </div>
+                        <div class="row m0">
+                          <div class="add_form card col-md-4">
+                              <input type="text" ng-model="product.mileage" placeholder="Mileage(ኪሎ ሜትር)">
+                          </div>
+                          <div class="add_form card col-md-4">
+                              <input type="text" ng-model="product.color" placeholder="Color">
+                          </div>
+                          <div class="add_form card col-md-4">
+                              <input type="text" ng-model="product.body" placeholder="Body">
+                          </div>
+                          <div class="add_form card col-md-4">
+                              <input type="text" ng-model="product.year_made" placeholder="Year made">
+                          </div>
+                        </div>
+                      </span>
+
+                        <span ng-if="categ == 6">
+                        <h4 class="pt20">Other details</h4>
+                        <div class="row m0">
+                          <div class="add_form card col-md-12">
+                              <input type="text" ng-model="product.events_company" placeholder="Company (ድርጅት)">
+                          </div>
+                          </div>
+                          <div class="row m0">
+                              <label class="block pl20 pt20">Starting Date (የሚጀምርበት ቀን)</label>
+                            <div class="add_form card col-md-8">
+                                <input type="date" ng-model="product.events_startdate">
+                            </div>
+                            <label class="block pl20 pt20">Ending Date (የሚያልቅበት ቀን)</label>
+                            <div class="add_form card col-md-4">
+                                <input type="date" ng-model="product.events_starttime">
+                            </div>
+                            </div>
+                        </span>
+
+        <div class="row m0 ptb30">
+                  <div class="col-md-12 center">
+
+                    <a class="bg-dark2 col-xs-12 plr30 ptb10 text-white" camera ng-model='myImages'>Take Picture</a>
+
+                    <a class="bg-dark-tr col-xs-12 plr30 ptb10 text-white mt30" library ng-model='myImages'>Load Picture</a>
+
+                  </div>
+                  
+                  <div ng-repeat="img in images" class="col-xs-2 plr5 ptb30 center">
+                    <img src="{{img}}" width="100%" ng-click="removeImage($index)">
+                    <i class="lnr lnr-cross" style="margin-top: -50px;z-index:999;color:red;font-size:24px;">clear</i>
+                  </div>
+
+                </div>
+
+
+
+        <div class="row m0">
+                    <div class="col-md-6 col-md-offset-3" style="z-index:1;">
+                      <div class="add_form card submit-btn bg-blue">
+                          <input type="submit" name="submit" value="Post" ng-click="publish()">
+                      </div>
+                    </div>
+                  </div>
+
+        <div class="clearfix"></div>
+
+                  </div>
+
+              </div>
+            </form>
+          </div>
+            <div class="overlay" ng-hide="justSubmitted || closeAddContent"></div><!--Add form-->
+
+
+
+            <div class="main-content">
+
+                <div ng-show="justSubmitted">
+                    <a class="bg-white box-shadow block mtb20">
+                        <h4 class="p20 fw700">{{justSubmittedProduct.name}}</h4>
+                        <div ng-show="images.length > 0" style="background:url({{images[0]}}) no-repeat center center; height:250px;" class="relative img-cover">
+                          <div class="ov-img-t absolute full"></div>
+                        </div>
+                        <div ng-show="images.length == 0" style="background:url(img/noimage.png) no-repeat center center; height:250px;" class="relative img-cover">
+                        <div class="ov-img-t absolute full"></div>
+                      </div>
+
+                        <div class="ptb20 plr20">
+                          <p class="wrapp">{{justSubmittedProduct.description | limitTo:120}}</p>
+                        </div>
+      
+                      </a>
+                </div>
+
+
+                <div ng-repeat="item in items" ng-show="items[0] != 'f'">
+
+                <div ng-if="$index % step == 0" class="">
+                    <hr class="op3">
+                    <p style="color: navy;font-weight: 900;text-transform: uppercase;">Advertisement</p>
+
+                  <div class="advertisement bg-white relative box-shadow block mt10 mb20">
+
+                              <!-- Advertisement -->
+                              <div ng-init="num=$index/step">
+                                  <a ng-click="openAdvm(advertisements[num].advm_url_address)">
+                                  <h4 class="p20 fw700">{{advertisements[num].advm_name}} </h4>
+                                  <div ng-show="advertisements[num].advm_image" style="background:url(https://clas.pssthemes.com/{{advertisements[num].advm_image}}) no-repeat center center; height:250px;" class="relative img-cover">
+                                    <div class="ov-img-t absolute full"></div>
+                                  </div>
+                                  <div class="ptb20 plr20">
+                                    <p class="">{{advertisements[num].advm_description | limitTo:120}}</p>
+                                  </div>
+                                </a>
+                              </div>
+                              
+
+                            </div>
+
+                            <hr class="op3">
+
+                </div>
+
+                <a ng-click="openLink('single-product.html?y'+item.i_slug+'&item='+item.i_slug+'&cat='+categ)" class="bg-white box-shadow block mtb20">
+                  <h4 class="p20 fw700">{{item.i_name}} <span class="float-right ptb3 plr10 round bg-blue text-white font-10 up">Details</span></h4>
+                  <p class="small mt-20 pl20 pb10">in {{item.city_name}}</p>
+
+                  <div ng-show="!item.me_img" style="background:url(img/noimage.png) no-repeat center center; height:250px;" class="relative img-cover"></div>
+                    <div ng-show="item.me_img" style="background:url(https://clas.pssthemes.com/media/{{item.i_media}}/{{item.me_img}}) no-repeat center center; height:250px;" class="relative img-cover"></div>
+
+                  <div class="ptb20 plr20">
+                    <p class="">{{item.i_description | limitTo:30}}</p>
+                  </div>
+
+                </a>
+
+              </div>
+
+              <div class="btn-more">
+                <a ng-show="items[0] != 'f'" ng-hide="currentPage == 1" ng-click="prev()">Prev</a>
+                <a ng-click="prev()" class="pl10" ng-hide="currentPage == 1">{{currentPage-1}}</a><a class="plr10 fw700">{{currentPage}}</a><a ng-click="next()" class="pr10" ng-hide="currentPage > count/set_listings_per_page">{{currentPage+1}}</a>
+                <a ng-show="items[0] != 'f'" ng-hide="currentPage > count/set_listings_per_page" ng-click="next()">Next</a>
+              </div>
+
+              <h3 class="center" ng-show="items[0] == 'f'">There are no items here.</h3>
+
+            </div><!--Main content-->
+
+            </div>
+
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+{% load staticfiles %}
+<div class="mt-100">
+  <div class="container">
+      <div class="bg-white round-small plr20 ptb30 box-shadow relative">
+        <div class="row">
+          <div class="col-md-1 pr0">
+            {% load staticfiles %}
+            <img class="elem-other round border-white2" src="{{ user.companybusiness.image.url }}">
+          </div>
+          <div class="col-md-7 border-right-gray mt10">
+            <div class="plr10">
+              <h4 class="mtb0 fw600">{{ user.username }}
+                <span class="float-right text-gray">
+                 <img src="https://png.icons8.com/wired/40/f39c12/trophy-filled.png">
+                </span>
+            </h4>
+              <p class="text-gray mb20 mt5 text-gray"> </p>
+              <p class="text-gray">{{ user.companybusiness.description|safe }} </p>
+            </div>
+            <a href="/user-profile/edit/">
+         <div class="gray-btn ptb10 plr30  font-12  inline up text-white" >Edit profile  </div> </a>
+          </div>
+          <div class="col-md-4 mt10">
+            <div class="row">
+              <div class="col-md-6">
+                  <p class="fw600">Phone</p>
+                  <p class="fw600">Address</p>
+                  <p class="fw600">Location</p>
+              </div>
+              <div class="col-md-6">
+                  <p>{{ user.companybusiness.phone }}</p>
+                  <p>{{ user.companybusiness.address }}</p>
+                  <p>{{ user.companybusiness.location }}</p>
+              </div>
+              <div class="col-md-12 mt20">
+              {% if user.companybusiness.facebook == 'none' %}
+                
+                {% else %}
+                
+               <a href="{{ user.companybusiness.facebook }}" > <img class="pr10" src="{% static 'business/img/facebook-f.png' %}"> </a>
+              {% endif %}
+               {% if user.companybusiness.twitter == 'none' %}
+                {% else %}
+                <a href="{{ user.companybusiness.twitter }}" > <img class="pr10" src="{% static 'business/img/twitter-filled.png' %}"> </a>
+               {%  endif %}
+               {% if user.companybusiness.instagram == 'none' %}
+
+                {% else %}
+                <a href="{{ user.companybusiness.instagram }}" > <img class="pr10" src="{% static 'business/img/instagram-filled.png' %}"> </a>
+                {% endif %}
+
+                {% if user.companybusiness.linkedin == 'none' %}
+
+                {% else %}
+                <a href="{{ user.companybusiness.linkedin }}" > <img class="pr10" src="{% static 'business/img/linkedin-2-filled.png' %}"> </a>
+                {% endif %}
+                
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+  </div>
+ </div>
+

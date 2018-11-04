@@ -1,0 +1,21 @@
+<div class="pb100">
+        <div class="container">
+          <div class="row ">
+              {% for testimonial in testimonials %}
+            <div class="col-md-6 center bg-gray-dark p0 round-small-top-bottom-left">
+            <div class="p50">
+                <img src="{{ testimonial.image.url }}" width="120" height="120" class="round-big" >
+                <p class="text-white">{{ testimonial.body }}</p>
+                <p class="font-12 text-white pt10">{{ testimonial.name }}</p>
+            </div>
+            </div>
+            {% endfor %}
+            {% load staticfiles %}
+              <div class="col-md-6 p0">
+                  <div class="round-small-top-bottom-right" style="background:url({% static 'business/img/about2.jpg' %}); background-size:cover; background-position:center; width:100%; height:327px;"></div>
+              </div>
+          </div>
+    
+    
+        </div>
+    </div>

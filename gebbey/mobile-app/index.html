@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <title>Classifieds mobile</title>
+
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+    <!--LinearIcons-->
+    <link href="lib/linearicons/style.css" rel="stylesheet">
+
+    <!--CSS Styles-->
+    <link rel = "stylesheet" type = "text/css" href = "css/grid.css">
+    <link rel = "stylesheet" type = "text/css" href = "css/style.css">
+
+    <!--jQuery-->
+    <script src="js/jquery.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/ngcordova.js"></script>
+
+    <script src="cordova.js"></script>
+
+        <!--JS Scripts-->
+        <script type = 'text/javascript' src = "js/scripts.js"></script>
+
+      </head>
+      <body ng-app="clas" ng-controller="categories">
+
+          <div class="loading" ng-show="noInternet"><h3>The internet connection is slow or there is no internet connection</h3><img src="img/loading.gif"></div>
+          <div class="loading" ng-hide="loading"><img src="img/loading.gif"></div>
+
+        <!--Header-->
+          <div class="header bg-grad">
+
+              <h4 class="inline pl15">GebeyApp</h4>
+              <div class="top-right">  
+                <a href="profile.html" ng-if="user !== 'null'"><i class="lnr lnr-user"></i></a>
+                <a href="login.html" ng-if="user == 'null'" class="mlr10"><i class="lnr lnr-enter"></i></a>
+                <a class="" href="search.html"><i class="lnr lnr-magnifier"></i></a>
+            </div>
+
+          </div><!--Header-->
+
+
+          <!--Page-->
+          <div class="page home-page container">
+
+            <div class="row categories">
+
+                  <a href="category-products.html?t={{cat.cat.c_slug}}&cat_slug={{cat.cat.c_slug}}&cat_id={{cat.cat.c_id}}&cat_name={{cat.cat.c_name}}" class="col-xs-6 categs-cont" ng-repeat="cat in categories.data">
+                      <div class="categ bg-white border-light">
+                        <img src="https://clas.pssthemes.com/media/categories/{{cat.cat.c_icon}}" height="50">
+                        <p class="center fw600">{{cat.cat.c_name}}</p>
+                        <p>({{cat.count}})</p>
+                    </div>
+                  </a>
+
+                </div>
+
+            </div><!--Main content-->
+
+</body> 
+
+</html>

@@ -1,0 +1,88 @@
+{% if messages %}
+<div class="messages">
+    {% for msg in messages %}       
+    <div>
+        <div class="m0 alert alert-{{msg.level_tag}}" role="alert">
+        {{msg.message}}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+<!--Top-->
+<div class="relative" style="background:url({{ home_banner.banner.url }}); background-size:cover; background-position:center; width:100%; height:650px;">
+  <div class="absolute full op8 bg-blue"></div>
+
+  <div class="container">
+    <div class="relative center">
+      <!--Login-->
+      <div class="ptb20 v-center">
+        <nav class="navbar navbar-inverse">
+          <div class="row">
+            <div class="col-md-3 plr0">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand text-white up fw100 letter-spacing3 single-link-w" href="/">Business</a>
+              </div>
+            </div>
+            <div class="col-md-9 pr0">
+              <div class="float-right">
+                <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                  <li><a href="/" class="text-white single-link-w">Home</a></li>
+                  <li><a href="/about/" class="text-white single-link-w">About</a></li>
+                  <li><a href="/user-profile/" class="text-white single-link-w">Profile</a></li>
+                  <li><a href="/contact/" class="text-white single-link-w">Contact</a></li>
+                  <li><a href="/signinregister/" class="text-white single-link-w"><img src="https://png.icons8.com/windows/20/ffffff/user.png"></a></li>
+                  <li>
+                    <a href="/add/" class="text-white single-link-w font-12">
+                    <div class="ad-button green-btn plr10 ptb7 round-small">+ Add your business</div>
+                    </a>
+                  </li>
+                </ul>
+                <form class="navbar-form navbar-left" type="get" action="" method="POST">
+                    {% csrf_token %}
+                  <div class="input-group">
+                      <!-- <form method="GET" action="" id="searchform"> -->
+                    <input class="form-control" id="q" name="q" type="text" placeholder="Search..."/>
+                    <div class="input-group-btn">
+                      <button class="btn btn-default" type="submit">
+                        <img src="https://png.icons8.com/windows/20/ffffff/search.png">
+                      </button>
+                    </div>
+                    </form>
+                  </div>
+                </form>
+              </div><!--collapse-->
+              </div>
+              </div>
+
+          </div>
+        </nav>
+      </div><!-- end login -->
+
+      <!-- Intro -->
+      <h1 class="text-white fw600" style="padding-top:10%;">{{ home_banner.top_text }}</h1>
+      <h4 class="text-light mt20 mb60 fw100"> {{ home_banner.mid_text }} </h4>
+
+      <!-- Categories -->
+      <a href="categories.html" class="inline single-link"><div class="visible-xs text-white cap font-12 border-white ptb5 plr20 round-small">show categories</div></a>
+      <div class="mt30 inline outside-categ hidden-xs">
+            {% for cat in categories %}
+          <a href={% url 'business:singlecat' slug=cat.slug pk=cat.pk  %}>
+              <div class="inside-categ categ-effect ptb10 plr20 m5 bg-white-tr round-small">
+                <img src="{{ cat.icon }}">
+                <p class="text-white font-10 mt5">{{ cat.name }}</p>
+              </div>
+            </a>
+            
+            {% endfor %}
+      </div><!-- end categories -->
+
+    </div>
+  </div>
+</div>

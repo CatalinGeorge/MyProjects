@@ -1,0 +1,41 @@
+
+
+ {% load staticfiles %}
+ {% if mainpic.image == 'noimage.jpg' %}
+ From <img src="{% static 'business/img/generic-user-purple.png' %}" width="40" class="round">
+ {% else %}
+From <img src="{{ mainpic.image.url }}" width="40" class="round"> 
+{% endif %}
+<a href={% url 'business:profile' slug=mainpic.slug pk=mainpic.user.pk  %}> {{ main.sender }} </a> <br>
+For :<a href={% url 'business:single' slug=main.business.slug pk=main.business.pk  %} >{{ main.business }}</a>
+<hr>
+Message: {{ main.message }}
+<hr>
+{% for reply in replies %}
+ 
+  {% if request.user == reply.sender  %}
+        {% if mypic.image == 'noimage.jpg' %}
+        <div class="pl30"><img src="{% static 'business/img/generic-user-purple.png' %}" width="40" class="round">
+        {% else %}
+        <div class="pl30"><img src="{{ mypic.image.url }}" width="40" class="round">
+            {% endif %}
+    {% elif request.user != reply.sender %}
+                {% if mainpic.image == 'noimage.jpg' %}
+                <div class="pl20"><img src="{% static 'business/img/generic-user-purple.png' %}" width="40" class="round">
+                {% else %}
+    <div class="pl20"><img src="{{ mainpic.image.url }}" width="40" class="round">
+        {% endif %}
+  {% endif %}
+  <div class="pl10">{{ reply.sender }} -> {{ reply.message }}</div><hr></div>
+{% endfor %}
+
+<hr>
+<form action="" method="post">
+    {% csrf_token %}
+        {{ form_reply.as_p }}
+        <input type="hidden" name="chat" value="{{ main.pk }}">
+    <input type="submit" name="form_reply"  class="gray-btn ptb10 plr50  font-12  inline up text-white" value="Submit">
+     <hr>
+     </form>
+
+    

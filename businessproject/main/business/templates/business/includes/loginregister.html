@@ -1,0 +1,75 @@
+{% if messages %}
+<div class="messages">
+    {% for msg in messages %}       
+    <div>
+        <div class="m0 alert alert-{{msg.level_tag}}" role="alert">
+        {{msg.message}}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+{% load staticfiles %}
+<div class="relative" style="background:url({% static 'business/img/bg-register2.jpg' %}); background-size:cover; background-position:center; width:100%; height:100%;">
+    <div class="absolute full op2 bg-dark"></div>
+       <div class="container ptb50 relative">
+         <div class="center ptb50 text-white">
+         <h1>Access your account to benefit </h1>
+         <p class="plr150">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+       </div>
+         <div class="row">
+            <div class="col-md-1"></div>
+            <!--Log In-->
+                    <div class="col-md-4 p0">
+                      <div class=" relative">
+                        <div class="absolute full op9 bg-dark"></div>
+                          <div class="relative p50">
+                               <h4 class="up text-left fw600 mt0 text-white"> sign in</h4>
+                               <form method="post">
+                                {% csrf_token %}
+                            
+                                {{ form_login.as_p }}
+                                {% for error in field.errors %}
+                                <p style="color: red">{{ error }}</p>
+                              {% endfor %}
+                                <button type="submit" name="form_login">Submit</button>
+                            
+                            
+                            </form>
+                            </div>
+                        </div>
+                      </div>
+  <!--Register-->
+  
+              <div class="col-md-6 p0">
+                  <div class=" relative">
+                  <div class=" p50 box-shadow bg-dark">
+                      <h4 class="up text-left fw600 mt0">Not a member?</h4>
+                <form method="post">
+                  {% csrf_token %}
+              
+                  {% for field in form_register %}
+                  <p>
+                    {{ field.label_tag }}<br>
+                    
+                    {{ field }}
+                    
+                    {% for error in field.errors %}
+                      <p style="color: red">{{ error }}</p>
+                    {% endfor %}
+                  </p>
+                {% endfor %}
+                  <button type="submit" name="form_register">Submit</button>
+              
+              
+              </form>
+              </div>
+              <a href="/" class="text-gray">Go back to home</a>
+            </div>
+                 </div>
+               </div>
+              <div class="col-md-1"></div>
+         </div>
+      </div>
+  </div>
+  

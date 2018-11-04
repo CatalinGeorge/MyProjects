@@ -1,0 +1,67 @@
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <title>Classifieds mobile</title>
+
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+    <!--CSS Styles-->
+    <link rel = "stylesheet" type = "text/css" href = "css/grid.css">
+    <link rel = "stylesheet" type = "text/css" href = "css/style.css">
+
+    <!--jQuery-->
+    <script src="js/jquery.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/ngcordova.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+
+        <!--JS Scripts-->
+        <script type = 'text/javascript' src = "js/scripts.js"></script>
+
+      </head>
+      <body ng-app="clas" ng-controller="account">
+
+          <div class="loading" ng-show="noInternet"><h3>The internet connection is slow or there is no internet connection</h3><img src="img/loading.gif"></div>
+
+<!--Page-->
+<div class="">
+
+  <!--Page content-->
+  <div class="row">
+
+    <div class="center ptb10 bg-blue">
+      <h2 class="text-white up fw100"> Sign in</h2>
+    </div>
+
+    <div class="round-small-bottom plr20 pb50 pt30">
+      <!--Login form-->
+
+        <div class="add_form card">
+            <input type="email" ng-model="email" placeholder="What is your ID? (user@gebeyapp.com)">
+        </div>
+        <div class="add_form card">
+            <input type="password" ng-model="password" placeholder="And your password?">
+        </div>
+        <div class="ptb10"></div>
+        <div class="add_form card submit-btn bg-blue">
+            <input type="submit" name="submit" value="Access" ng-click="login(email, password)">
+        </div>
+
+        <a href="register.html" class="block center pt30">Register</a>
+
+        <a ng-if="user !== 'null'" onclick="window.history.back()" class="block center pt30">Back</a>
+
+      </div>
+
+    </div><!--Page content-->
+
+</div><!--Page-->
+
+</body>
+</html>

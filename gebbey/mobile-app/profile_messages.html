@@ -1,0 +1,76 @@
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <title>Classifieds mobile</title>
+
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+    <!--LinearIcons-->
+    <link href="lib/linearicons/style.css" rel="stylesheet">
+
+    <!--CSS Styles-->
+    <link rel = "stylesheet" type = "text/css" href = "css/grid.css">
+    <link rel = "stylesheet" type = "text/css" href = "css/style.css">
+
+    <!--jQuery-->
+    <script src="js/jquery.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/ngcordova.js"></script>
+
+        <!--JS Scripts-->
+        <script type = 'text/javascript' src = "js/scripts.js"></script>
+
+      </head>
+      <body ng-app="clas" ng-controller="profile">
+
+        <!--Page-->
+        <div class="container" ng-init="getuserMessages()">
+           <!-- Top -->
+  <div style="background-image: url(img/home1.jpg);" class="img-cover center relative">
+    <div class="bg-grad absolute full op9"></div>
+
+    <div class="row v-center">
+      <div class="col-xs-3">
+        <h3 class="text-white fw100 ptb10"><a onclick="window.history.back()"><i class="lnr lnr-chevron-left arrow_back"></i></a></h3>
+      </div>
+      <div class="col-xs-9">
+        <div class="text-white row small">
+          <a href="profile.html" class="col-xs-4 center">
+            <i class="lnr lnr-text-align-right"></i><div class="center">Items</div>
+          </a>
+          <a href="profile_messages.html" class="col-xs-4 center">
+            <i class="lnr lnr-bubble"></i><div class="center">Messages</div>
+          </a>
+          <div class="col-xs-4 center" ng-click="signout()">
+            <i class="lnr lnr-exit"></i><div class="center">Sign Out</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+        </div><!--Page-->
+
+        <div ng-show="user_comments == 'false'" class="center p30">No discussions.</div>
+
+<div ng-show="user_comments != 'false'">
+        <a href="message.html?id={{comment.co_listing}}&listing_user={{comment.co_listing_user}}" class="v-center avatar plr20 border-bottom" ng-repeat="comment in user_comments">
+          <span class="v-center">
+              <div class="ptb20">
+                <h4 class="fw600">{{comment.u_username}}</h4>
+                <p class="small">{{comment.co_comment}}</p>
+              </div>
+          </span>
+          <p class="small v-right">
+            <i class="lnr lnr-chevron-right"></i>
+          </p>
+        </a>
+      </div>
+
+</body>
+</html>

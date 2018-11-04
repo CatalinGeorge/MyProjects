@@ -1,0 +1,104 @@
+{% load staticfiles %}
+<section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+      <!--Comments-->
+      <div class="border-gray round-small p30">
+
+          <form  action="" method="POST">
+              {% csrf_token %}
+      <div class="row pb10">
+        <div class="col-md-11 p0">
+          <div class="form-elem-com">
+          {{ form_comment }}
+          </div>
+        </div>
+        <div class="col-md-1 p0">
+          <div class="right">
+            <input type="submit"  name="form_comment" value="Submit" class="inline p10 border-gray" >
+            <!-- <a href="#"><img src="https://png.icons8.com/ios/20/8389af/sent-filled.png" class="inline p10 border-gray"></a> -->
+          </div>
+        </div>
+      </div>
+      </form>
+
+      
+        <h6 class="up text-gray fw700 mtb20">post comments ({{ count_comments }})</h6>
+        {% for comment in comments %}
+        <div class="row">
+          <div class="col-md-1">
+            <img src="{{ comment.sender_profile.image.url }}" width="50" class="round">
+          </div>
+          <div class="col-md-11">
+            <div class="plr10">
+              <h5 class="fw700 mt0">{{ comment.sender }} <span class="float-right text-green fw300 font-12"><img src="https://png.icons8.com/ios/15/27ae60/time.png"> &nbsp; {{ comment.date }}</span></h5>
+              <p class="lh-20 text-gray">{{ comment.text }}</p>
+              <p class="float-right">
+                <img src="https://png.icons8.com/ios/15/8389af/like-filled.png">
+                <img src="https://png.icons8.com/ios/15/8389af/right2-filled.png" class="mlr10">
+                <img src="https://png.icons8.com/ios/15/8389af/speech-bubble-with-dots-filled.png">
+              </p>
+            </div>
+          </div>
+        </div>
+        {% for cr in comment_replys %}
+        {% if cr.comment_id == comment %}
+            <img src="{{ cr.sender_profile.image.url }}"  width="30" class="round" >
+            {{ cr.sender }} -
+            {{ cr.text }}<br>
+            {% endif %}
+        {% endfor %}
+
+          <form  action="" method="POST">
+              {% csrf_token %}
+             {{ form_reply.as_p }}
+            <input type="text" name="comment_id" value="{{ comment.id }}" >
+
+              <input type="submit"  name="form_reply" value="Submit" class="inline p10 border-gray" >
+            </form>
+        <hr>
+        {% endfor %}
+  
+       
+       
+      </div>
+    </div>
+  
+      <!-- Right Side -->
+      <div class="col-md-3 pr0">
+        <div class="border-gray round-small p20">
+        <h6 class="up text-gray fw700 mb20">Recently Viewed</h6>
+        <hr>
+          {% for item in items %}
+        <div class="row v-center">
+          {% if item.image1 == 'noimage.jpg' %}
+          <div class="col-md-3 p0">
+              <img src="{% static 'business/img/buss-icon.png' %}" width="40" height="40" class="round">
+            </div>
+            {% else %}
+          <div class="col-md-3 p0">
+            <img src="{{ item.image1.url }}" width="40" height="40" class="round">
+          </div>
+          {% endif %}
+          <div class="col-md-9 p0">
+            <a href={% url 'business:single' slug=item.slug pk=item.pk  %}  > <h5 class="fw700 mtb0">{{ item.title }}</h5></a>
+              <p class="text-gray font-12 mb0">{{ item.description|safe|slice:":55" }}</p>
+          </div>
+        </div>
+        <hr>
+        {% endfor %}
+        
+  
+        
+  
+        
+  
+        
+      </div>
+    </div>
+  
+  </div><!-- end row -->
+    </div><!-- end container -->
+  </section>
+  

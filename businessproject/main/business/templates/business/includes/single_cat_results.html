@@ -1,0 +1,83 @@
+{% load mathfilters %}
+<section class="bg-white">
+        <div class="container">
+          <h3 class="center mt0">Results</h3>
+          <p class="text-gray center pb30 "> {{ text }} </p>
+          <div class="row">
+            
+        
+      {% for result in results %}
+      <div class="col-md-4">
+            <div class="box-shadow mtb20 pb10 round-small-bottom">
+             <a href={% url 'business:single' slug=result.slug pk=result.pk  %}  ><div class="round-small-top relative" style="background:url({{ result.image1.url }}); background-size:cover; background-position:center; width:100%; height:150px;">
+                <div class="op2 bg-dark absolute full"></div>
+              </div></a>
+              <div class="relative inline float-right bg-green text-white plr15 ptb5 round-small mt-15 mr15 font-12">{{ result.category }}</div>
+              <div class="plr15">
+                <h5 class="cap fw600">{{ result.title }}</h5>
+                <p class="text-gray font-12">{{ result.description|safe|slice:":55" }}</p>
+                <hr>
+                <p class="cap text-gray font-12">
+                  <img src="https://png.icons8.com/material/15/27ae60/marker.png">
+                  <span class="text-align-mid">{{ result.location }}</span>
+                  <span class="float-right">
+                  
+                      {% with v_n=result.votes_number t_v=result.total_votes %}
+                      {% if v_num != 0 %}
+                          {% if  t_v|div:v_n > 4.5  %}
+                          <img src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                          <img src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                          <img src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                          <img src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                          <img src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                           
+                          {% elif t_v|div:v_n > 4 %}
+
+                          <img src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                          <img src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                          <img src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                          <img src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                          <img src="https://png.icons8.com/windows/12/27ae60/star.png">
+
+                          {% elif t_v|div:v_n > 3 %}
+
+                          <img src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                          <img src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                          <img src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                          <img src="https://png.icons8.com/windows/12/27ae60/star.png">
+                          <img src="https://png.icons8.com/windows/12/27ae60/star.png">
+
+                          {% elif t_v|div:v_n > 2 %}
+
+                          <img src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                          <img src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                          <img src="https://png.icons8.com/windows/12/27ae60/star.png">
+                          <img src="https://png.icons8.com/windows/12/27ae60/star.png">
+                          <img src="https://png.icons8.com/windows/12/27ae60/star.png">
+
+                          {% elif t_v|div:v_n > 1 %}
+
+                          <img src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                          <img src="https://png.icons8.com/windows/12/27ae60/star.png">
+                          <img src="https://png.icons8.com/windows/12/27ae60/star.png">
+                          <img src="https://png.icons8.com/windows/12/27ae60/star.png">
+                          <img src="https://png.icons8.com/windows/12/27ae60/star.png">
+
+
+                          {% endif %}
+                                                             
+                      {% else %}
+                      <img src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                      {% endif %}
+                    {% endwith %}
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>     
+           {% empty %}
+      No products yet.
+      {% endfor %}
+    </div><!-- END ROW  -->
+</div>
+</section>

@@ -1,0 +1,115 @@
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <title>Classifieds mobile</title>
+
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+    <!--CSS Styles-->
+    <link rel = "stylesheet" type = "text/css" href = "css/grid.css">
+    <link rel = "stylesheet" type = "text/css" href = "css/style.css">
+
+    <!--jQuery-->
+    <script src="js/jquery.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/ngcordova.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+
+        <!--JS Scripts-->
+        <script type = 'text/javascript' src = "js/scripts.js"></script>
+
+  </head>
+  <body ng-app="clas" ng-controller="account">
+
+        <div class="loading" ng-show="noInternet"><h3>The internet connection is slow or there is no internet connection</h3><img src="img/loading.gif"></div>
+
+<!--Page-->
+<div class="">
+
+  <!--Page content-->
+  <div class="row">
+
+    <div class="center ptb10 bg-blue">
+      <h2 class="text-white up fw100">Register</h2>
+    </div>
+
+    <div class="round-small-bottom plr20 pb50 pt30">
+      <!--Register form-->
+      
+      <h4 class="pt20">Login details</h4>
+      <div class="add_form card">
+        <input type="text" ng-model="userid" placeholder="User ID" ng-change="checkUsername(userid)">
+      </div>
+      <h4>{{useridtemp}}</h4>
+      <div class=" p20" ng-show="!usernameNA && userid">
+        <span>You cannot use this ID.</span>
+    </div>
+
+      <div class="add_form card">
+          <input type="password" ng-model="password" placeholder="Password">
+      </div>
+
+      <h4 class="pt20">Location</h4>
+      <div class="row m0" ng-init="country='sel';state='sel';city='sel'">
+        <div class="add_form card col-md-4">
+          <select ng-model="country" name="country" ng-change="getStates(country)">
+            <option value="sel">Country(አገር)</option>
+
+            <option ng-repeat="country in countries" value="{{country.country_id}}">{{country.country_name}}</option>
+
+        </select>
+        </div>
+        <div class="add_form card col-md-4">
+          <select ng-model="state" name="state" ng-change="getCities(state)">
+            <option value='sel'>State(ክልል)</option>
+            <option ng-repeat="state in states" value="{{state.state_id}}">{{state.state_name}}</option>
+        </select>
+        </div>
+        <div class="add_form card col-md-4">
+          <select ng-model="city" name="city">
+            <option value='sel'>City(ከተማ)</option>
+            <option ng-repeat="city in cities" value="{{city.city_id}}">{{city.city_name}}</option>
+        </select>
+        </div>
+      </div>
+
+        <h4 class="pt20">Personal info</h4>
+        <div class="add_form card">
+            <input type="text" ng-model="username" placeholder="Full name">
+          </div>
+
+      <div class="add_form card mt20">
+        <input type="email" ng-model="email" placeholder="Email (optional)">
+    </div>
+
+      <div class="add_form card">
+          <input type="text" ng-model="phone" placeholder="Phone number">
+      </div>
+
+      <div class="ptb10"></div>
+      <div ng-show="usernameNA && username != '' && password && phone" class="add_form card submit-btn bg-blue">
+          <input type="submit" name="submit" value="Register" ng-click="register(userid, email, username, password, country, state, city, phone)" ng-hide="registerPressed">
+      </div><!--Register form-->
+
+      <a href="login.html" class="block center pt30">Login</a>
+
+      <a ng-if="user !== 'null'" onclick="window.history.back()" class="block center pt30">Back</a>
+
+      <!--a ng-click="getPhoneNumber()" class="block center pt30">Phone</a-->
+
+      
+
+    </div>
+
+</div><!--Page content-->
+
+</div><!--Page-->
+
+</body>
+</html>

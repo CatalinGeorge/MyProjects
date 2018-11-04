@@ -1,0 +1,140 @@
+{% load mathfilters %}
+{% load staticfiles %}
+<section class="bg-white ptb50">
+    <div class="container">
+      <!--Row-->
+      <div class="row">
+ 
+        <!-- Left Side -->
+        <div class="col-md-9 pl0">
+          <div class="border-gray round-small p20">
+            <ul class="nav nav-tabs">
+             <li><a data-toggle="tab" href="#home" class="up text-gray fw700 font-12 pl0 pr0">My Services</a></li>
+             <li><a data-toggle="tab" href="#menu1" class="up text-gray fw700 font-12 pl0 pr0 mlr30">My Messages</a></li>
+             <li class="active"><a data-toggle="tab" href="#menu2" class="up text-gray fw700 font-12 pl0 pr0">My Ratings</a></li>
+           </ul>
+ 
+           <div class="tab-content">
+             <div id="home" class="tab-pane fade">
+               <p class="fw600 mtb20">My Services ({{ count }})</p>
+               {% for post in posts %}
+               <div class="row">
+                 {% if post.image1 == 'noimage.jpg' %}
+                 <div class="col-md-1"> <a href={% url 'business:single' slug=post.slug pk=post.pk  %}  > 
+                    <img src="{% static 'business/img/buss-icon.png' %}" width="40" height="40" class="round"></a>
+                  </div>
+                 {% else %}
+                 <div class="col-md-1"> <a href={% url 'business:single' slug=post.slug pk=post.pk  %}  > 
+                   <img src="{{ post.image1.url }}" width="40" height="40" class="round"></a>
+                 </div>
+                 {% endif %}
+                 <div class="col-md-11 pr0">
+                   <div class="plr10">
+                     <h5 class="fw700">{{ post.title }}
+                       <span class="float-right text-right">
+                        <a href={% url 'business:edit_product' slug=post.slug pk=post.pk  %}  > 
+                        <div class="edit-btn border ptb5 plr20 round-small center fw600 inline up text-dark font-10 mlr5">Edit</div></a>
+                        <a href={% url 'business:delete' pk=post.pk  %}  > 
+                         <div class="delete-btn border ptb5 plr20 round-small center fw600 inline up text-dark font-10 mlr5">Delete</div></a>
+                       </span>
+                     </h5>
+                   </div>
+                 </div>
+               </div>
+               <hr>
+               {% endfor %}
+               
+             </div>
+             <div id="menu1" class="tab-pane fade">
+               <p class="fw600 mtb20">Inbox ({{ countchat }})</p>
+
+              
+               {% for ch in chat %}  
+               {% with img=ch.sender_profile.image %}
+               <div class="row">
+                 <div class="col-md-1">
+                   {% if img == 'noimage.jpg' %}
+                   
+                   <a href={% url 'business:profile' slug=ch.sender_profile.slug pk=ch.sender.pk  %} ><img src="{% static 'business/img/generic-user-purple.png' %}" width="40" class="round"> </a>
+                  {% else %}
+                      <a href={% url 'business:profile' slug=ch.sender_profile.slug pk=ch.sender.pk  %} ><img src="{{ ch.sender_profile.image.url }}" width="40" class="round"> </a>
+                      {% endif %}
+                 </div>
+                 <div class="col-md-11">
+                   <div class="plr10">
+                     <h5 class="fw700 mt0"> {{ ch.sender }} <span class="float-right text-gray fw300 font-12"><img src="https://png.icons8.com/ios/15/27ae60/time.png"> &nbsp; 18 minutes ago</span></h5>
+                     <p class="lh-20 text-gray"> {{ ch.message }} </p>
+                    <a href={% url 'business:conversation' pk=ch.pk  %} ><img src="https://png.icons8.com/ios/20/8389af/reply-arrow-filled.png" class="float-right"></a>
+                   </div>
+                 </div>
+               </div>
+                {% endwith %}
+               {% endfor %}
+              
+             </div>
+             <div id="menu2" class="tab-pane fade in active">
+               <p class="fw600 mtb20">Ratings</p>
+             
+                    {% for post in posts %}
+                    <div class="row">
+                        <div class="col-md-1">
+                      {% if post.image1 == 'noimage.jpg' %}
+                      <a href={% url 'business:single' slug=post.slug pk=post.pk  %}  > 
+                          <img src="{% static 'business/img/buss-icon.png' %}" width="40" height="40" class="round"></a>
+                        {% else %}
+                  <a href={% url 'business:single' slug=post.slug pk=post.pk  %}  > 
+                        <img src="{{ post.image1.url }}" width="40" height="40" class="round"></a>
+                        {% endif %}
+                      </div>
+                      <div class="col-md-11 pr0">
+                          <div class="plr10">
+                              <h5 class="fw700">  {{ post.title }} </h5> 
+                               Average rating
+                      {% with v_num=post.votes_number %}
+                        {% if v_num != 0 %}
+                      {{ post.total_votes|div:post.votes_number|floatformat:2 }}
+                         {% else %}
+                          0
+                      {% endif %},
+                      {% endwith %}
+                      Total views: {{ post.views }}
+                      <hr>
+                      </div> 
+                      </div>
+                      </div>
+                     
+                    {% endfor %}
+             </div>
+           </div>
+          </div>
+        </div>
+ 
+        <!-- Right Side -->
+        <div class="col-md-3 pr0">
+          <div class="border-gray round-small p20">
+          <h6 class="up text-gray fw700 mb20">Saved ({{ countsaved }})</h6>
+          <hr>
+ 
+            {% for save in saved %}
+          <div class="row v-center">
+            <div class="col-md-3 p0">
+              <a href={% url 'business:single' slug=save.product.slug pk=save.product.pk  %}  >  <img src="{{ save.product.image1.url }}" width="40" height="40" class="round"></a>
+            </div>
+            <div class="col-md-9 p0">
+                <h5 class="fw700 mtb0">{{ save.product }}</h5>
+                <div class="float-right ">
+                    <a href={% url 'business:remove_favorite_profile' pk=save.product.id  %}  >
+                  <img src="https://png.icons8.com/ultraviolet/16/000000/cancel.png"></a>
+                </div>
+                <p class="text-gray font-12 mb0">{{ save.product.description }}</p>
+                
+            </div>
+          </div>
+          <hr> 
+          {% endfor %}
+        </div>
+        </div>
+      </div>
+      <!--Row-->
+     </div>
+   </section>

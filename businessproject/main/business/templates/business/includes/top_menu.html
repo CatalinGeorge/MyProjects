@@ -1,0 +1,56 @@
+{% if messages %}
+<div class="messages">
+    {% for msg in messages %}       
+    <div>
+        <div class="m0 alert alert-{{msg.level_tag}}" role="alert">
+        {{msg.message}}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+{% load staticfiles %}
+<div class="relative" style="background:url({% static 'business/img/top.jpg' %}); background-size:cover; background-position:center; width:100%; height:auto;">
+  <div class="pb150 absolute op9 full bg-blue"></div>
+  
+  <div class="container">
+      <!--Login-->
+      <div class="relative center">
+      <div class="pt20 pb100 v-center">
+        <nav class="navbar navbar-inverse">
+          <div class="row">
+            <div class="col-md-3 plr0">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand text-white up fw100 letter-spacing3 single-link-w" href="/">Business</a>
+              </div>
+            </div>
+            <div class="col-md-9 pr0">
+              <div class="float-right">
+                <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                  <li><a href="/" class="text-white single-link-w">Home</a></li>
+                  <li><a href="/about/" class="text-white single-link-w">About</a></li>
+                  <li><a href="/user-profile/" class="text-white single-link-w">Profile</a></li>
+                  <li><a href="/contact/" class="text-white single-link-w">Contact</a></li>
+                  <li><a href="/signinregister/" class="text-white single-link-w"><img src="https://png.icons8.com/windows/20/ffffff/user.png"></a></li>
+                  <li>
+                    <a href="/add/" class="text-white single-link-w font-12">
+                    <div class="ad-button green-btn plr10 ptb7 round-small">+ Add your business</div>
+                    </a>
+                  </li>
+                </ul>
+              </div><!--collapse-->
+              </div>
+              </div>
+
+          </div>
+        </nav>
+      </div><!-- end login -->
+    </div>
+    </div>
+  </div>

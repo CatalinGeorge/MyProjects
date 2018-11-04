@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <title>Classifieds mobile</title>
+
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+    <!--CSS Styles-->
+    <link rel = "stylesheet" type = "text/css" href = "css/grid.css">
+    <link rel = "stylesheet" type = "text/css" href = "css/style.css">
+
+    <!--jQuery-->
+    <script src="js/jquery.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/ngcordova.js"></script>
+
+        <!--JS Scripts-->
+        <script type = 'text/javascript' src = "js/scripts.js"></script>
+
+      </head>
+      <body>
+
+
+        <!--Header-->
+          <div class="header bg-grad">
+
+              <a onclick="window.history.back()"><i class="material-icons arrow_back">keyboard_arrow_left</i></a>
+
+              <div class="top-right">
+                  <a href="profile.html" ng-if="user !== 'null'"><i class="material-icons">account_circle</i></a>
+                  <a href="login.html" ng-if="user == 'null'" class="mlr10"><i class="material-icons">exit_to_app</i></a>
+                <label class="">
+                  <div class="search-box">
+                    <input type="text" name="search" placeholder="Enter search terms and press enter">
+                  </div>
+                  <a class="search-btn"><i class="material-icons">search</i></a>
+                </label>
+              </div>
+
+          </div><!--Header-->
+
+        <!-- Favorites -->
+        <div class="box-shadow mt50 mlr10 round-medium">
+          <div style="background:url(img/home1.jpg) no-repeat center center; height:150px;" class="relative img-cover round-medium">
+            <div class="ov-img-t absolute full round-medium"></div>
+
+            <div class="relative">
+              <div class="v-center plr20 ptb10">
+                <a href="single-product.html">
+                  <h3 class="fw700 text-white">Winter's Clothes</h3>
+                  <p class="small text-gray">12 minutes ago in New York</p>
+                </a>
+                <div class="small v-right"><img src="https://png.icons8.com/ios/30/c0392b/like-filled.png"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="box-shadow m10 round-medium">
+          <div style="background:url(img/home2.jpg) no-repeat center center; height:150px;" class="relative img-cover round-medium">
+            <div class="ov-img-t absolute full round-medium"></div>
+
+            <div class="relative">
+              <div class="v-center plr20 ptb10">
+                <a href="single-product.html">
+                  <h3 class="fw700 text-white">Winter's Clothes</h3>
+                  <p class="small text-gray">12 minutes ago in New York</p>
+                </a>
+                <div class="small v-right"><img src="https://png.icons8.com/ios/30/bdc3c7/like-filled.png"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box-shadow m10 round-medium">
+          <div style="background:url(img/home3.jpg) no-repeat center center; height:150px;" class="relative img-cover round-medium">
+            <div class="ov-img-t absolute full round-medium"></div>
+
+            <div class="relative">
+              <div class="v-center plr20 ptb10">
+                <a href="single-product.html">
+                  <h3 class="fw700 text-white">Winter's Clothes</h3>
+                  <p class="small text-gray">12 minutes ago in New York</p>
+                </a>
+                <div class="small v-right"><img src="https://png.icons8.com/ios/30/c0392b/like-filled.png"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box-shadow m10 round-medium">
+          <div style="background:url(img/home4.jpg) no-repeat center center; height:150px;" class="relative img-cover round-medium">
+            <div class="ov-img-t absolute full round-medium"></div>
+
+            <div class="relative">
+              <div class="v-center plr20 ptb10">
+                <a href="single-product.html">
+                  <h3 class="fw700 text-white">Winter's Clothes</h3>
+                  <p class="small text-gray">12 minutes ago in New York</p>
+                </a>
+                <div class="small v-right"><img src="https://png.icons8.com/ios/30/c0392b/like-filled.png"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+</body>
+
+</html>

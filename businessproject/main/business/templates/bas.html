@@ -1,0 +1,57 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <!-- CSS -->
+  {% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'business/css/style.css' %}" type = "text/css"/>
+
+  <!-- Lainside-categ compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Lainside-categ compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+  <script type="text/javascript" src="{{ STATIC_URL }}/tinymce/media/tiny_mce/tiny_mce.js"></script>
+
+  
+</head>
+
+<body>
+
+
+    {% block content %}
+    {% endblock %}	
+
+    <script src = "{% static 'js/jquery.min.js' %}"></script>
+    <script src = "{% static 'js/bootstrap.min.js' %}"></script>
+{% block javascript %}
+{% endblock %}
+
+    <div class="center bg-blue3 ptb30">
+        <div class="container">
+          {% for social in socials %}
+          <a href='{{ social.url }}' ><img class="bg-blue-tr round p5 mlr10 social-icons" src="{{ social.icon.url }}"></a>
+       
+          {% endfor %}
+        <!-- <img class="bg-blue-tr round p5 mlr10 social-icons" src="https://png.icons8.com/ios/20/8389af/google-plus.png">
+        <img class="bg-blue-tr round p5 mlr10 social-icons" src="https://png.icons8.com/windows/20/8389af/bebo.png">
+        <img class="bg-blue-tr round p5 mlr10 social-icons" src="https://png.icons8.com/material/20/8389af/tencent-weibo.png">
+        <img class="bg-blue-tr round p5 mlr10 social-icons" src="https://png.icons8.com/android/20/8389af/twitter.png"> -->
+      </div>
+      </div>
+    
+      <div class="center bg-blue2 ptb20">
+        <div class="container">
+        <p class="text-gray font-12"> Copyright Rentals &copy; 2018 All rights reserved</p>
+        <a href="/terms/" class="single-link font-12"><p class="text-gray">Terms & Conditions</p></a>
+      </div>
+    </div>
+    
+    </body>
+    </html>

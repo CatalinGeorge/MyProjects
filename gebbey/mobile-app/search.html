@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <title>Classifieds mobile</title>
+
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+    <!--LinearIcons-->
+    <link href="lib/linearicons/style.css" rel="stylesheet">
+
+    <!--CSS Styles-->
+    <link rel = "stylesheet" type = "text/css" href = "css/grid.css">
+    <link rel = "stylesheet" type = "text/css" href = "css/style.css">
+
+    <!--jQuery-->
+    <script src="js/jquery.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/ngcordova.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+
+        <!--JS Scripts-->
+        <script type = 'text/javascript' src = "js/scripts.js"></script>
+
+      </head>
+      <body ng-app="clas" ng-controller="search">
+
+          <div class="loading" ng-show="noInternet"><h3>The internet connection is slow or there is no internet connection</h3><img src="img/loading.gif"></div>
+          <div class="loading" ng-hide="loading"><img src="img/loading.gif"></div>
+
+          <!--Header-->
+          <div class="header bg-grad">
+
+            <a onclick="window.history.back()" style="margin-left:-5px;"><i class="lnr lnr-chevron-left arrow_back"></i></a>
+
+            <div class="top-right">
+                <a href="profile.html" ng-if="user !== 'null'"><i class="lnr lnr-user"></i></a>
+                <a href="login.html" ng-if="user == 'null'" class="mlr10"><i class="lnr lnr-enter"></i></a>
+              <label class="" ng-init="searchOn = false">
+                      <a class="" style="z-index: 99999999;position:absolute;right:50px;padding-top:5px;" ng-click="searchTerms = ''"><i class="lnr lnr-cross" style="color:#ddd;"></i></a>
+                <div class="search-box">
+                  <input type="text" ng-model="searchTerms" placeholder="Enter search terms...">
+                </div>
+                <a class=""><i class="lnr lnr-magnifier"></i></a>
+                <a class="" ng-click="runSearch(searchTerms)"><i class="lnr lnr-checkmark-circle" style="display: inline-block; padding-top:3px; padding-bottom:0px !important; font-size:24px !important;"></i></a>
+              </label>
+            </div>
+
+        </div><!--Header-->
+
+          <!--Page-->
+          <div class="page home-page container" ng-init="getPhoneNumber()">
+
+            <div class="row pt10">
+
+                <div class="" ng-repeat = "item in results">
+                  <a ng-click="openLink('single-product.html?item='+item.i_slug+'&cat='+categ)" class="bg-white box-shadow block mtb20">
+                    <h4 class="p20 fw700">{{item.i_name}} <span class="float-right ptb3 plr10 round bg-blue text-white font-10 up">Details</span></h4>
+                    <p class="small mt-20 pl20 pb10">in {{item.city_name}}</p>
+  
+                    <div ng-show="!item.me_img" style="background:url(img/noimage.png) no-repeat center center; height:250px;" class="relative img-cover"></div>
+                      <div ng-show="item.me_img" style="background:url(https://clas.pssthemes.com/media/{{item.i_media}}/{{item.me_img}}) no-repeat center center; height:250px;" class="relative img-cover"></div>
+    
+                    <div class="ptb20 plr20">
+                      <p class="wrapp">{{item.i_description | limitTo:120}}</p>
+                    </div>
+  
+                  </a>
+  
+                </div>
+
+                <div class="center pt30" ng-show="results.length == 0">
+                  No results for your query. You can try a different search.
+                </div>
+
+                <div class="center pt30" ng-show="!results">
+                  Input your search query.
+                </div>
+
+                </div>
+
+
+            </div>
+         </div>
+
+    </body>
+</html>

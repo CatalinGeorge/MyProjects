@@ -1,0 +1,10 @@
+[13-Jun-2018 09:53:38 Europe/Bucharest] PHP Fatal error:  Cannot redeclare Mobile::get_single_product() in /home/dinpixme/ccs.pssthemes.com/app/controllers/Mobile.php on line 33
+[13-Jun-2018 12:45:41 Europe/Bucharest] PHP Fatal error:  Cannot redeclare Mobile::get_single_product() in /home/dinpixme/ccs.pssthemes.com/app/controllers/Mobile.php on line 33
+[18-Jun-2018 12:12:28 Europe/Bucharest] PHP Fatal error:  Cannot redeclare Categories::get_subcategories() in /home/dinpixme/ccs.pssthemes.com/app/controllers/admin/Categories.php on line 38
+[22-Jun-2018 09:27:41 Europe/Bucharest] PHP Fatal error:  Cannot redeclare Mobile::get_single_product() in /home/dinpixme/ccs.pssthemes.com/app/controllers/Mobile.php on line 33
+[22-Jun-2018 09:28:45 Europe/Bucharest] PHP Fatal error:  Cannot redeclare Mobile::get_single_product() in /home/dinpixme/ccs.pssthemes.com/app/controllers/Mobile.php on line 33
+[22-Jun-2018 09:30:36 Europe/Bucharest] PHP Fatal error:  Cannot redeclare Mobile::get_single_product() in /home/dinpixme/ccs.pssthemes.com/app/controllers/Mobile.php on line 33
+[22-Jun-2018 09:30:41 Europe/Bucharest] PHP Fatal error:  Cannot redeclare Mobile::get_single_product() in /home/dinpixme/ccs.pssthemes.com/app/controllers/Mobile.php on line 33
+[22-Jun-2018 09:32:00 Europe/Bucharest] PHP Fatal error:  Cannot redeclare Mobile::get_single_product() in /home/dinpixme/ccs.pssthemes.com/app/controllers/Mobile.php on line 33
+[22-Jun-2018 09:52:46 Europe/Bucharest] PHP Fatal error:  Cannot redeclare Mobile::get_single_product() in /home/dinpixme/ccs.pssthemes.com/app/controllers/Mobile.php on line 33
+[22-Jun-2018 10:03:41 Europe/Bucharest] PHP Fatal error:  Cannot redeclare Mobile::get_single_product() in /home/dinpixme/ccs.pssthemes.com/app/controllers/Mobile.php on line 33

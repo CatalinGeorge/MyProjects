@@ -1,0 +1,40 @@
+<section>
+    <div class="container">
+      <h3 class="center mt0">Featured</h3>
+      <p class="text-gray center pb30 ">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+     <div class="row">
+        {% for business in businesses %}
+       <div class="col-md-3">
+          <div class="card-box mtb10">
+            <div class="card-flip">
+              <div class="card-front center" style="background:url({{ business.image1.url }}); background-size:cover; background-position:center; width:100%; height:250px;">
+                <h6 class="up bg-green-tr inline mt100 ptb10 plr20 fw600  text-white">{{ business.category }}</h6>
+              </div>
+              <div class="card-back box-shadow">
+                  <div class="p20 center">
+                    <a href={% url 'business:single' slug=business.slug pk=business.pk  %}  > <h5 class="ptb10 text-dark fw600">{{ business.title }}</h5></a>
+                    <p class="text-gray font-12">{{ business.description|safe }}</p>
+                    <hr class="hr-width">
+                    <p class="cap text-gray font-12">
+                      <img src="https://png.icons8.com/material/15/27ae60/marker.png">
+                      <span class="text-align-mid">{{ business.location }}</span>
+                    </p>
+                    <p>
+                      <span class="">
+                        <img src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                        <img src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                        <img src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                        <img src="https://png.icons8.com/windows/12/27ae60/filled-star.png">
+                        <img src="https://png.icons8.com/windows/12/27ae60/star.png">
+                      </span>
+                    </p>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>       
+        {% endfor %}
+      </div>
+      
+    </div>}
+    </section>

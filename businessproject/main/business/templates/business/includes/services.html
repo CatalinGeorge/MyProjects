@@ -1,0 +1,22 @@
+<section class="bg-light2">
+    <div class="container center">
+      <h3 class="cap center mt0">our services</h3>
+      <p class="text-gray center pb30 ">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+       <div class="row">
+           
+        {% for service in services %}
+        <div class="col-md-4">
+             <div class="m10 outside-serv round-small">
+               <div class="inside-serv inline mt40 round p10 box-shadow">
+                 <img src="{{ service.image.url }}">
+               </div>
+             <div class="p20">
+               <h5 class="cap fw600">{{ service.title }}</h5>
+               <p class="mb0 font-12 text-gray">{{ service.description }}</p>
+             </div>
+             </div>
+           </div>
+           {% endfor %}
+       </div>
+    </div>
+ </section>
